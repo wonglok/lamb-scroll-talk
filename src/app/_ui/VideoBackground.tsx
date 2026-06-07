@@ -24,10 +24,12 @@ export function VideoBackground({
   containerID = "#my-container",
   adsID = "",
   content,
+  onReady = () => {},
 }: {
   adsID: string;
   containerID: string;
   content?: ReactNode | null;
+  onReady?: () => void;
 }) {
   const [sURL, setScrollURL] = useState(false);
   useEffect(() => {
@@ -180,6 +182,8 @@ export function VideoBackground({
                 currentTime: ev.target.duration || 1,
               },
             );
+
+            onReady();
           }}
         ></video>
       )}

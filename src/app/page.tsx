@@ -1,36 +1,47 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { HeroContent } from "./_ui/HeroContent";
-import { MoreContent } from "./_ui/MoreContent";
+// Suspense,
+import { useEffect, useState } from "react";
+// import { HeroContent } from "./_ui/HeroContent";
+// import { MoreContent } from "./_ui/MoreContent";
 import { VideoBackground } from "./_ui/VideoBackground";
 
 export default function Page() {
   const height = useHeight();
-
+  const [show, setShow] = useState(false);
   return (
     <>
       <div className=" fixed top-0 left-0 w-full h-full select-none">
         <VideoBackground
           adsID={"#ads"}
           containerID={"#my-container"}
+          onReady={() => {
+            //
+            //
+            setShow(true);
+          }}
         ></VideoBackground>
       </div>
 
       <div
         id="my-container"
-        className=" absolute top-0 left-0 w-full h-full z-20 overflow-scroll"
+        className={
+          " absolute top-0 left-0 w-full h-full z-20 overflow-scroll " +
+          `${show ? `visible` : `invisible`}`
+        }
       >
         <Padding></Padding>
         <div id="ads">
-          <div
-            className="w-full bg-black/20 backdrop-blur-2xl flex items-center justify-center"
-            style={{ height: `${height}` }}
-          >
-            <div className="text-6xl text-amber-100 text-shadow-[#ffb74c] text-shadow-2xs">
-              Thank you!
+          {show && (
+            <div
+              className="w-full bg-black/20 backdrop-blur-2xl flex items-center justify-center"
+              style={{ height: `${height}` }}
+            >
+              <div className="text-6xl text-amber-100 text-shadow-[#ffb74c] text-shadow-2xs">
+                Thank you!
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>
