@@ -24,9 +24,13 @@ export default function Page() {
         <Padding></Padding>
         <div id="ads">
           <div
-            className="w-full bg-gray-200"
+            className="w-full bg-black/20 backdrop-blur-2xl flex items-center justify-center"
             style={{ height: `${height}` }}
-          ></div>
+          >
+            <div className="text-6xl text-amber-100 text-shadow-[#ffb74c] text-shadow-2xs">
+              Thank you!
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -96,7 +100,7 @@ function Padding({}) {
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`...to sleep again. 😆`}</div>
+          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`back to sleep again. 😆`}</div>
         </div>
       </div>
     </>

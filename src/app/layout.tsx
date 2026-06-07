@@ -15,8 +15,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Heavenly Home",
-  description: "Your heavenly home with Jesus awaits — a place of perfect peace and everlasting love.",
+  title: "Sleepy Lamb",
+  description: "Sleepy Lamb",
 };
 
 export default function RootLayout({
