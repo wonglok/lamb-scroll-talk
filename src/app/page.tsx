@@ -1,7 +1,7 @@
 "use client";
 
 // Suspense,
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { HeroContent } from "./_ui/HeroContent";
 // import { MoreContent } from "./_ui/MoreContent";
 import { VideoBackground } from "./_ui/VideoBackground";
@@ -9,6 +9,9 @@ import { VideoBackground } from "./_ui/VideoBackground";
 export default function Page() {
   const height = useHeight();
   const [show, setShow] = useState(false);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <div className=" fixed top-0 left-0 w-full h-full select-none">
@@ -24,6 +27,7 @@ export default function Page() {
       </div>
 
       <div
+        ref={scrollRef}
         id="my-container"
         className={
           " absolute top-0 left-0 w-full h-full z-20 overflow-scroll " +
@@ -64,7 +68,7 @@ const useHeight = () => {
   return height;
 };
 
-function Padding({}) {
+function Padding({ scrollToBottom = () => {} }) {
   const height = useHeight();
 
   return (
