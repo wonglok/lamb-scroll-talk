@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import { VideoBackground } from "./_ui/VideoBackground";
 
 export default function Page() {
-  const height = useHeight();
   const [show, setShow] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  let height = useHeight();
 
   return (
     <>
@@ -68,8 +68,8 @@ const useHeight = () => {
   return height;
 };
 
-function Padding({ scrollToBottom = () => {} }) {
-  const height = useHeight();
+function Padding({}) {
+  let height = useHeight();
 
   return (
     <>
