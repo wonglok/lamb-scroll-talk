@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-cinzel);
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-cormorant);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+/* ── Gold gradient text ── */
+.gold-text {
+  background: linear-gradient(
+    135deg,
+    #b8860b 0%,
+    #daa520 25%,
+    #f0d060 50%,
+    #daa520 75%,
+    #b8860b 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Parchment noise texture ── */
+.parchment-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ── Ornamental gold rule ── */
+.ornament-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #b8860b;
+}
+.ornament-rule::before,
+.ornament-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #b8860b 20%,
+    #daa520 50%,
+    #b8860b 80%,
+    transparent 100%
+  );
+}
+
+/* ── Animations ── */
+@keyframes gold-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentle-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(200, 160, 60, 0.2),
+      0 0 40px rgba(200, 160, 60, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(220, 180, 80, 0.4),
+      0 0 60px rgba(200, 160, 60, 0.2);
+  }
+}
+
+.animate-shimmer {
+  animation: gold-shimmer 4s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-glow {
+  animation: gentle-glow 3s ease-in-out infinite;
+}
+
+.anim-delay-1 {
+  animation-delay: 0.15s;
+}
+.anim-delay-2 {
+  animation-delay: 0.3s;
+}
+.anim-delay-3 {
+  animation-delay: 0.45s;
+}
+.anim-delay-4 {
+  animation-delay: 0.6s;
+}
+.anim-delay-5 {
+  animation-delay: 0.75s;
+}
