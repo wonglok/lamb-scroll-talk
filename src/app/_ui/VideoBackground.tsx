@@ -101,7 +101,7 @@ export function VideoBackground({
           let snapTimeout: ReturnType<typeof setTimeout>;
           let isTouching = false;
           let currentStop = 0; // the stop we're currently locked to
-          const SENSITIVITY = 0.075; // only need to swipe 15% past a stop to trigger page change
+          const SENSITIVITY = 0.1; // only need to swipe 15% past a stop to trigger page change
 
           const getStopInfo = () => {
             let winHeight = window.innerHeight;
@@ -122,13 +122,29 @@ export function VideoBackground({
             };
           };
 
+          let lerpRaf: number | null = null;
+
           const scrollToStop = (index: number) => {
             let { total } = getStopInfo();
             if (total <= 0) return;
             index = Math.max(0, Math.min(stops - 1, index));
             let targetScrollTop = (index / (stops - 1)) * total;
-            container.scrollTo({ top: targetScrollTop, behavior: "smooth" });
             currentStop = index;
+
+            if (lerpRaf) cancelAnimationFrame(lerpRaf);
+
+            const lerp = () => {
+              let current = container.scrollTop;
+              let next = current + (targetScrollTop - current) * 0.1;
+              if (Math.abs(targetScrollTop - next) < 0.5) {
+                container.scrollTop = targetScrollTop;
+                lerpRaf = null;
+                return;
+              }
+              container.scrollTop = next;
+              lerpRaf = requestAnimationFrame(lerp);
+            };
+            lerpRaf = requestAnimationFrame(lerp);
           };
 
           const snapDirectional = () => {
