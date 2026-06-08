@@ -101,7 +101,7 @@ export function VideoBackground({
           let snapTimeout: ReturnType<typeof setTimeout>;
           let isTouching = false;
           let currentStop = 0; // the stop we're currently locked to
-          const SENSITIVITY = 0.05; // only need to swipe 15% past a stop to trigger page change
+          const SENSITIVITY = 0.075; // only need to swipe 15% past a stop to trigger page change
 
           const getStopInfo = () => {
             let winHeight = window.innerHeight;
