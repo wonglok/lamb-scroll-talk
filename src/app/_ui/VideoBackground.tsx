@@ -3,7 +3,6 @@
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useHeight } from "./useHeight";
 gsap.registerPlugin(ScrollTrigger);
 
 /* The encoding is super important here to enable frame-by-frame scrubbing. */
@@ -26,15 +25,11 @@ export function VideoBackground({
   adsID = "",
   content,
   onReady = () => {},
-  stops = 0,
-  sensitivity = 0.08,
 }: {
   adsID: string;
   containerID: string;
   content?: ReactNode | null;
   onReady?: () => void;
-  stops?: number;
-  sensitivity?: number;
 }) {
   const [sURL, setScrollURL] = useState(false);
   useEffect(() => {
@@ -66,23 +61,23 @@ export function VideoBackground({
       }, 1);
     });
 
-    // {
-    //   let ttt = setInterval(() => {
-    //     let video = document.querySelector("#vid");
-    //     if (video) {
-    //       clearInterval(ttt);
+    {
+      let ttt = setInterval(() => {
+        let video = document.querySelector("#vid");
+        if (video) {
+          clearInterval(ttt);
 
-    //       once(video, "play", async function (e) {
-    //         //
+          once(video, "play", async function (e) {
+            //
 
-    //         video.pause();
+            video.pause();
 
-    //         //
-    //         //
-    //       });
-    //     }
-    //   }, 1);
-    // }
+            //
+            //
+          });
+        }
+      }, 1);
+    }
 
     fetch("/vids/output.mp4")
       .then(async (r) => {
@@ -119,110 +114,14 @@ export function VideoBackground({
 
             video.currentTime = (video.duration || 1) * progress;
 
-            if (refHScroll.current) {
-              refHScroll.current.style.transform = `translateX(${window.innerWidth * -9 * progress}px)`;
+            if (document.querySelector("#horizontal")) {
+              //
             }
           });
           //
         }
       }, 1);
     }
-
-    // {
-    //   let ttt = setInterval(() => {
-    //     let container = document.querySelector(containerID) as HTMLDivElement;
-
-    //     let video = document.querySelector("#vid");
-    //     let ads = document.querySelector(adsID);
-    //     if (video && ads && container && video.duration) {
-    //       clearInterval(ttt);
-    //       //
-    //       //
-    //       // // --- Touch lock-step ---
-    //       // let currentStop = 0;
-    //       // let lerpRaf: number | null = null;
-
-    //       // const getStopInfo = () => {
-    //       //   let winHeight = window.innerHeight;
-    //       //   let scrollHeight = container.scrollHeight;
-    //       //   let adsHeight = ads.clientHeight;
-    //       //   let total = scrollHeight - winHeight - adsHeight;
-    //       //   let progress = total > 0 ? container.scrollTop / total : 0;
-    //       //   let rawIndex = progress * (stops - 1);
-    //       //   return { total, progress, rawIndex };
-    //       // };
-
-    //       // const scrollToStop = (index: number) => {
-    //       //   let { total } = getStopInfo();
-    //       //   if (total <= 0) return;
-    //       //   index = Math.max(0, Math.min(stops - 1, index));
-    //       //   let target = (index / (stops - 1)) * total;
-    //       //   currentStop = index;
-
-    //       //   if (lerpRaf) cancelAnimationFrame(lerpRaf);
-    //       //   const lerp = () => {
-    //       //     let cur = container.scrollTop;
-    //       //     let next = cur + (target - cur) * 0.1;
-    //       //     if (Math.abs(target - next) < 0.5) {
-    //       //       container.scrollTop = target;
-    //       //       lerpRaf = null;
-    //       //       return;
-    //       //     }
-    //       //     container.scrollTop = next;
-    //       //     lerpRaf = requestAnimationFrame(lerp);
-    //       //   };
-    //       //   lerpRaf = requestAnimationFrame(lerp);
-    //       // };
-
-    //       // if (stops > 1) {
-    //       //   container.addEventListener("touchstart", () => {
-    //       //     let { rawIndex } = getStopInfo();
-    //       //     currentStop = Math.round(rawIndex);
-    //       //     currentStop = Math.max(0, Math.min(stops - 1, currentStop));
-    //       //     if (lerpRaf) cancelAnimationFrame(lerpRaf);
-    //       //   });
-
-    //       //   container.addEventListener("touchend", () => {
-    //       //     let { rawIndex } = getStopInfo();
-    //       //     let delta = rawIndex - currentStop;
-
-    //       //     if (delta > sensitivity) {
-    //       //       scrollToStop(currentStop + 1);
-    //       //     } else if (delta < -sensitivity) {
-    //       //       scrollToStop(currentStop - 1);
-    //       //     } else {
-    //       //       scrollToStop(currentStop);
-    //       //     }
-    //       //   });
-    //       // }
-    //       // // --- end touch lock-step ---
-
-    //       container.addEventListener("scroll", (ev) => {
-    //         let scrollTop = container.scrollTop;
-    //         let winHeight = window.innerHeight;
-
-    //         let scrollHeight = container.scrollHeight;
-
-    //         let adsHeight = ads.clientHeight;
-    //         let total = scrollHeight - winHeight - adsHeight;
-
-    //         let progress = scrollTop / total;
-
-    //         if (progress >= 0.995) {
-    //           progress = 0.995;
-    //         }
-    //         // console.log(scrollTop / total);
-
-    //         video.currentTime = (video.duration || 1) * progress;
-
-    //         if (refHScroll.current) {
-    //           refHScroll.current.style.transform = `translateX(${window.innerWidth * -9 * progress}px)`;
-    //         }
-    //       });
-    //       //
-    //     }
-    //   }, 1);
-    // }
 
     /* ---------------------------------- */
     /* Scroll Control! */
@@ -245,18 +144,14 @@ export function VideoBackground({
     /* ---------------------------------- */
   }, []);
 
-  const refHScroll = useRef();
-
-  const height = useHeight();
-
   return (
     <>
       {/*  */}
 
       <img className=" z-[1] absolute top-0 left-0 object-cover w-full h-full select-none fill-background bg-linear-60 from-grey-200 to-grey-700"></img>
 
-      <div className=" absolute top-0 left-0 z-[2] w-full h-full bg-[#b2f5ff] flex items-center justify-center">
-        <div className="text-7xl text-white">{`Loading`}</div>
+      <div className=" absolute top-0 left-0 z-[1] w-full h-full bg-white flex items-center justify-center">
+        <div className="text-7xl">{`Loading`}</div>
       </div>
 
       {sURL && (
@@ -264,6 +159,7 @@ export function VideoBackground({
           className=" z-[15] absolute top-0 left-0 object-cover w-full h-full select-none"
           id="vid"
           src={sURL}
+          preload="auto"
           autoFocus
           muted
           playsInline={true}
@@ -290,43 +186,12 @@ export function VideoBackground({
                 currentTime: ev.target.duration || 1,
               },
             );
+
+            onReady();
           }}
         ></video>
-      )}
-
-      {sURL && (
-        <div className=" absolute top-0 left-0 z-[20] w-full h-full overflow-x-hidden  touch-manipulation select-none pointer-events-none ">
-          <div className="h-full flex w-[900vw]" ref={refHScroll}>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's Go!`}</div>
-            </div>
-            <div className="w-full h-full flex items-end justify-center ">
-              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Back to slee pagain 😆`}</div>
-            </div>
-          </div>
-        </div>
       )}
     </>
   );
 }
+//horizontal
