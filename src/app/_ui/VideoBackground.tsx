@@ -267,37 +267,39 @@ export function VideoBackground({
         ></video>
       )}
 
-      <div className=" absolute top-0 left-0 z-[20] w-full h-full overflow-x-hidden ">
-        <div className="h-full flex w-[900vw]" ref={refHScroll}>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's Go!`}</div>
-          </div>
-          <div className="w-full h-full flex items-end justify-center ">
-            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Back to slee pagain 😆`}</div>
+      {sURL && (
+        <div className=" absolute top-0 left-0 z-[20] w-full h-full overflow-x-hidden  touch-manipulation select-none pointer-events-none ">
+          <div className="h-full flex w-[900vw]" ref={refHScroll}>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's Go!`}</div>
+            </div>
+            <div className="w-full h-full flex items-end justify-center ">
+              <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Back to slee pagain 😆`}</div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
