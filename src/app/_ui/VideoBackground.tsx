@@ -158,6 +158,7 @@ export function VideoBackground({
           preload="auto"
           autoFocus
           muted
+          autoPlay
           playsInline={true}
           onLoadedMetadata={(ev) => {
             const container = document.querySelector(containerID);
@@ -183,16 +184,13 @@ export function VideoBackground({
               },
             );
 
-            let onLoad = () => {
-              ev.target.removeEventListener("load", onLoad);
+            ev.target.play();
+            ev.target.currentTime = 0.0001;
+            setTimeout(() => {
+              ev.target.currentTime = 0;
 
-              ev.target.play();
-              setTimeout(() => {
-                ev.target.stop();
-              });
-            };
-            ev.target.addEventListener("load", onLoad);
-            onReady();
+              onReady();
+            }, 10);
           }}
         ></video>
       )}
