@@ -254,8 +254,7 @@ export function VideoBackground({
               },
             );
 
-            ev.target.play();
-            ev.target.currentTime = 0.0001;
+            ev.target.currentTime = 0.1;
             setTimeout(() => {
               ev.target.currentTime = 0;
 

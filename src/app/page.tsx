@@ -37,7 +37,7 @@ export default function Page() {
       >
         <Padding></Padding>
         <div id="ads">
-          {show && (
+          {/* {show && (
             <div
               className="w-full bg-black/20 backdrop-blur-2xl flex items-center justify-center"
               style={{ height: `${height}` }}
@@ -46,7 +46,7 @@ export default function Page() {
                 Thank you!
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </>
