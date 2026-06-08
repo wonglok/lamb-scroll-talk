@@ -25,13 +25,11 @@ export function VideoBackground({
   adsID = "",
   content,
   onReady = () => {},
-  stops = 0,
 }: {
   adsID: string;
   containerID: string;
   content?: ReactNode | null;
   onReady?: () => void;
-  stops?: number;
 }) {
   const [sURL, setScrollURL] = useState(false);
   useEffect(() => {
@@ -98,108 +96,23 @@ export function VideoBackground({
         if (video && ads && container && video.duration) {
           clearInterval(ttt);
           //
-          let snapTimeout: ReturnType<typeof setTimeout>;
-          let isTouching = false;
-          let currentStop = 0; // the stop we're currently locked to
-          const SENSITIVITY = 0.15; // only need to swipe 15% past a stop to trigger page change
-
-          const getStopInfo = () => {
-            let winHeight = window.innerHeight;
-            let scrollHeight = container.scrollHeight;
-            let adsHeight = ads.clientHeight;
-            let total = scrollHeight - winHeight - adsHeight;
-            let progress = total > 0 ? container.scrollTop / total : 0;
-            let rawIndex = progress * (stops - 1);
-            let stopDistance = 1 / (stops - 1); // distance between stops in progress units
-            return {
-              total,
-              progress,
-              rawIndex,
-              stopDistance,
-              winHeight,
-              scrollHeight,
-              adsHeight,
-            };
-          };
-
-          let lerpRaf: number | null = null;
-
-          const scrollToStop = (index: number) => {
-            let { total } = getStopInfo();
-            if (total <= 0) return;
-            index = Math.max(0, Math.min(stops - 1, index));
-            let targetScrollTop = (index / (stops - 1)) * total;
-            currentStop = index;
-
-            if (lerpRaf) cancelAnimationFrame(lerpRaf);
-
-            const lerp = () => {
-              let current = container.scrollTop;
-              let next = current + (targetScrollTop - current) * 0.1;
-              if (Math.abs(targetScrollTop - next) < 0.5) {
-                container.scrollTop = targetScrollTop;
-                lerpRaf = null;
-                return;
-              }
-              container.scrollTop = next;
-              lerpRaf = requestAnimationFrame(lerp);
-            };
-            lerpRaf = requestAnimationFrame(lerp);
-          };
-
-          const snapDirectional = () => {
-            if (!stops || stops < 2) return;
-            let { rawIndex, stopDistance } = getStopInfo();
-
-            // How far past the current stop have we scrolled (in stop units)
-            let delta = rawIndex - currentStop;
-
-            // Very sensitive: only need to exceed SENSITIVITY of one stop distance
-            if (delta > SENSITIVITY) {
-              scrollToStop(currentStop + 1);
-            } else if (delta < -SENSITIVITY) {
-              scrollToStop(currentStop - 1);
-            } else {
-              scrollToStop(currentStop); // snap back
-            }
-          };
-
-          container.addEventListener("touchstart", () => {
-            isTouching = true;
-            clearTimeout(snapTimeout);
-            // Lock in the current stop at the start of the gesture
-            let { rawIndex } = getStopInfo();
-            currentStop = Math.round(rawIndex);
-            currentStop = Math.max(0, Math.min(stops - 1, currentStop));
-          });
-
-          container.addEventListener("touchend", () => {
-            isTouching = false;
-            snapDirectional();
-          });
-
-          // Also update currentStop when a programmatic scroll finishes
-          container.addEventListener("scrollend", () => {
-            let { rawIndex } = getStopInfo();
-            currentStop = Math.round(rawIndex);
-            currentStop = Math.max(0, Math.min(stops - 1, currentStop));
-          });
-
           container.addEventListener("scroll", (ev) => {
             let scrollTop = container.scrollTop;
-            let { total, progress } = getStopInfo();
+            let winHeight = window.innerHeight;
+
+            let scrollHeight = container.scrollHeight;
+
+            let adsHeight = ads.clientHeight;
+            let total = scrollHeight - winHeight - adsHeight;
+
+            let progress = scrollTop / total;
 
             if (progress >= 0.995) {
               progress = 0.995;
             }
+            // console.log(scrollTop / total);
 
             video.currentTime = (video.duration || 1) * progress;
-
-            // Desktop scroll-snap: wait for scroll to stop, then snap directionally
-            if (stops > 1 && !isTouching) {
-              clearTimeout(snapTimeout);
-              snapTimeout = setTimeout(snapDirectional, 150);
-            }
           });
           //
         }
@@ -245,6 +158,7 @@ export function VideoBackground({
           preload="auto"
           autoFocus
           muted
+          autoPlay
           playsInline={true}
           onLoadedMetadata={(ev) => {
             const container = document.querySelector(containerID);
