@@ -229,7 +229,6 @@ export function VideoBackground({
           preload="auto"
           autoFocus
           muted
-          autoPlay
           playsInline={true}
           onLoadedMetadata={(ev) => {
             const container = document.querySelector(containerID);
