@@ -76,47 +76,47 @@ function Padding({}) {
     <>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's go!`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's go!`}</div> */}
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
         <div className="flex items-end lg:items-center justify-end h-full w-full">
-          <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`back to sleep again. 😆`}</div>
+          {/* <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`back to sleep again. 😆`}</div> */}
         </div>
       </div>
     </>
