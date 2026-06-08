@@ -102,64 +102,64 @@ export function VideoBackground({
           clearInterval(ttt);
           //
           //
-          // --- Touch lock-step ---
-          let currentStop = 0;
-          let lerpRaf: number | null = null;
+          // // --- Touch lock-step ---
+          // let currentStop = 0;
+          // let lerpRaf: number | null = null;
 
-          const getStopInfo = () => {
-            let winHeight = window.innerHeight;
-            let scrollHeight = container.scrollHeight;
-            let adsHeight = ads.clientHeight;
-            let total = scrollHeight - winHeight - adsHeight;
-            let progress = total > 0 ? container.scrollTop / total : 0;
-            let rawIndex = progress * (stops - 1);
-            return { total, progress, rawIndex };
-          };
+          // const getStopInfo = () => {
+          //   let winHeight = window.innerHeight;
+          //   let scrollHeight = container.scrollHeight;
+          //   let adsHeight = ads.clientHeight;
+          //   let total = scrollHeight - winHeight - adsHeight;
+          //   let progress = total > 0 ? container.scrollTop / total : 0;
+          //   let rawIndex = progress * (stops - 1);
+          //   return { total, progress, rawIndex };
+          // };
 
-          const scrollToStop = (index: number) => {
-            let { total } = getStopInfo();
-            if (total <= 0) return;
-            index = Math.max(0, Math.min(stops - 1, index));
-            let target = (index / (stops - 1)) * total;
-            currentStop = index;
+          // const scrollToStop = (index: number) => {
+          //   let { total } = getStopInfo();
+          //   if (total <= 0) return;
+          //   index = Math.max(0, Math.min(stops - 1, index));
+          //   let target = (index / (stops - 1)) * total;
+          //   currentStop = index;
 
-            if (lerpRaf) cancelAnimationFrame(lerpRaf);
-            const lerp = () => {
-              let cur = container.scrollTop;
-              let next = cur + (target - cur) * 0.1;
-              if (Math.abs(target - next) < 0.5) {
-                container.scrollTop = target;
-                lerpRaf = null;
-                return;
-              }
-              container.scrollTop = next;
-              lerpRaf = requestAnimationFrame(lerp);
-            };
-            lerpRaf = requestAnimationFrame(lerp);
-          };
+          //   if (lerpRaf) cancelAnimationFrame(lerpRaf);
+          //   const lerp = () => {
+          //     let cur = container.scrollTop;
+          //     let next = cur + (target - cur) * 0.1;
+          //     if (Math.abs(target - next) < 0.5) {
+          //       container.scrollTop = target;
+          //       lerpRaf = null;
+          //       return;
+          //     }
+          //     container.scrollTop = next;
+          //     lerpRaf = requestAnimationFrame(lerp);
+          //   };
+          //   lerpRaf = requestAnimationFrame(lerp);
+          // };
 
-          if (stops > 1) {
-            container.addEventListener("touchstart", () => {
-              let { rawIndex } = getStopInfo();
-              currentStop = Math.round(rawIndex);
-              currentStop = Math.max(0, Math.min(stops - 1, currentStop));
-              if (lerpRaf) cancelAnimationFrame(lerpRaf);
-            });
+          // if (stops > 1) {
+          //   container.addEventListener("touchstart", () => {
+          //     let { rawIndex } = getStopInfo();
+          //     currentStop = Math.round(rawIndex);
+          //     currentStop = Math.max(0, Math.min(stops - 1, currentStop));
+          //     if (lerpRaf) cancelAnimationFrame(lerpRaf);
+          //   });
 
-            container.addEventListener("touchend", () => {
-              let { rawIndex } = getStopInfo();
-              let delta = rawIndex - currentStop;
+          //   container.addEventListener("touchend", () => {
+          //     let { rawIndex } = getStopInfo();
+          //     let delta = rawIndex - currentStop;
 
-              if (delta > sensitivity) {
-                scrollToStop(currentStop + 1);
-              } else if (delta < -sensitivity) {
-                scrollToStop(currentStop - 1);
-              } else {
-                scrollToStop(currentStop);
-              }
-            });
-          }
-          // --- end touch lock-step ---
+          //     if (delta > sensitivity) {
+          //       scrollToStop(currentStop + 1);
+          //     } else if (delta < -sensitivity) {
+          //       scrollToStop(currentStop - 1);
+          //     } else {
+          //       scrollToStop(currentStop);
+          //     }
+          //   });
+          // }
+          // // --- end touch lock-step ---
 
           container.addEventListener("scroll", (ev) => {
             let scrollTop = container.scrollTop;
