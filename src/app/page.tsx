@@ -16,7 +16,7 @@ export default function Page() {
     <>
       <div className=" fixed top-0 left-0 w-full h-full select-none">
         <VideoBackground
-          stops={10}
+          stops={9}
           adsID={"#ads"}
           containerID={"#my-container"}
           onReady={() => {
