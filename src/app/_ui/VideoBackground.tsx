@@ -183,6 +183,15 @@ export function VideoBackground({
               },
             );
 
+            let onLoad = () => {
+              ev.target.removeEventListener("load", onLoad);
+
+              ev.target.play();
+              setTimeout(() => {
+                ev.target.stop();
+              });
+            };
+            ev.target.addEventListener("load", onLoad);
             onReady();
           }}
         ></video>
