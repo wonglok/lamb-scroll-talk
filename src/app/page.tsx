@@ -16,6 +16,7 @@ export default function Page() {
     <>
       <div className=" fixed top-0 left-0 w-full h-full select-none">
         <VideoBackground
+          stops={9}
           adsID={"#ads"}
           containerID={"#my-container"}
           onReady={() => {
@@ -74,47 +75,47 @@ function Padding({}) {
   return (
     <>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's go!`}</div>
         </div>
       </div>
       <div className="w-full select-none" style={{ height: height }}>
-        <div className="flex items-center justify-end h-full w-full">
+        <div className="flex items-end lg:items-center justify-end h-full w-full">
           <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`back to sleep again. 😆`}</div>
         </div>
       </div>

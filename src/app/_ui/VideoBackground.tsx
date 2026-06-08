@@ -25,11 +25,13 @@ export function VideoBackground({
   adsID = "",
   content,
   onReady = () => {},
+  stops = 0,
 }: {
   adsID: string;
   containerID: string;
   content?: ReactNode | null;
   onReady?: () => void;
+  stops?: number;
 }) {
   const [sURL, setScrollURL] = useState(false);
   useEffect(() => {
@@ -96,6 +98,35 @@ export function VideoBackground({
         if (video && ads && container && video.duration) {
           clearInterval(ttt);
           //
+          let snapTimeout: ReturnType<typeof setTimeout>;
+          let isTouching = false;
+
+          const snapToNearestStop = () => {
+            if (!stops || stops < 2) return;
+            let winHeight = window.innerHeight;
+            let scrollHeight = container.scrollHeight;
+            let adsHeight = ads.clientHeight;
+            let total = scrollHeight - winHeight - adsHeight;
+            if (total <= 0) return;
+
+            let progress = container.scrollTop / total;
+            let stopIndex = Math.round(progress * (stops - 1));
+            stopIndex = Math.max(0, Math.min(stops - 1, stopIndex));
+            let targetScrollTop = (stopIndex / (stops - 1)) * total;
+
+            container.scrollTo({ top: targetScrollTop, behavior: "smooth" });
+          };
+
+          container.addEventListener("touchstart", () => {
+            isTouching = true;
+            clearTimeout(snapTimeout);
+          });
+
+          container.addEventListener("touchend", () => {
+            isTouching = false;
+            snapToNearestStop();
+          });
+
           container.addEventListener("scroll", (ev) => {
             let scrollTop = container.scrollTop;
             let winHeight = window.innerHeight;
@@ -113,6 +144,12 @@ export function VideoBackground({
             // console.log(scrollTop / total);
 
             video.currentTime = (video.duration || 1) * progress;
+
+            // Desktop scroll-snap: wait for scroll to stop, then snap to nearest lock point
+            if (stops > 1 && !isTouching) {
+              clearTimeout(snapTimeout);
+              snapTimeout = setTimeout(snapToNearestStop, 150);
+            }
           });
           //
         }
