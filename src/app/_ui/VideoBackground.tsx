@@ -3,6 +3,7 @@
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useHeight } from "./useHeight";
 gsap.registerPlugin(ScrollTrigger);
 
 /* The encoding is super important here to enable frame-by-frame scrubbing. */
@@ -177,6 +178,10 @@ export function VideoBackground({
             // console.log(scrollTop / total);
 
             video.currentTime = (video.duration || 1) * progress;
+
+            if (refHScroll.current) {
+              refHScroll.current.style.transform = `translateX(${window.innerWidth * -9 * progress}px)`;
+            }
           });
           //
         }
@@ -204,13 +209,17 @@ export function VideoBackground({
     /* ---------------------------------- */
   }, []);
 
+  const refHScroll = useRef();
+
+  const height = useHeight();
+
   return (
     <>
       {/*  */}
 
       <img className=" z-[1] absolute top-0 left-0 object-cover w-full h-full select-none fill-background bg-linear-60 from-grey-200 to-grey-700"></img>
 
-      <div className=" absolute top-0 left-0 z-[1] w-full h-full bg-[#b2f5ff] flex items-center justify-center">
+      <div className=" absolute top-0 left-0 z-[2] w-full h-full bg-[#b2f5ff] flex items-center justify-center">
         <div className="text-7xl text-white">{`Loading`}</div>
       </div>
 
@@ -257,6 +266,38 @@ export function VideoBackground({
           }}
         ></video>
       )}
+
+      <div className=" absolute top-0 left-0 z-[20] w-full h-full overflow-x-hidden ">
+        <div className="h-full flex w-[900vw]" ref={refHScroll}>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Are you sleepy?`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Time to sleep.`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Count the sheep.`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Good morning!`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's get off bed.`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`A new day!`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Shine!`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Let's Go!`}</div>
+          </div>
+          <div className="w-full h-full flex items-end justify-center ">
+            <div className="m-5 p-5 backdrop-blur-md rounded-2xl bg-white/30 text-6xl">{`Back to slee pagain 😆`}</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

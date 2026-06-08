@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // import { HeroContent } from "./_ui/HeroContent";
 // import { MoreContent } from "./_ui/MoreContent";
 import { VideoBackground } from "./_ui/VideoBackground";
+import { useHeight } from "./_ui/useHeight";
 
 export default function Page() {
   const [show, setShow] = useState(false);
@@ -52,22 +53,6 @@ export default function Page() {
     </>
   );
 }
-
-const useHeight = () => {
-  let [height, setHeight] = useState("100vh");
-  useEffect(() => {
-    setHeight(`${window.innerHeight}px`);
-    let tt = () => {
-      setHeight(`${window.innerHeight}px`);
-    };
-    window.addEventListener("resize", tt);
-    return () => {
-      window.removeEventListener("resize", tt);
-    };
-  }, []);
-
-  return height;
-};
 
 function Padding({}) {
   let height = useHeight();
