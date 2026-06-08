@@ -38,33 +38,33 @@ export function VideoBackground({
 }) {
   const [sURL, setScrollURL] = useState(false);
   useEffect(() => {
-    // function once(
-    //   el: HTMLElement,
-    //   event: Record<string, any>,
-    //   fn: () => void,
-    //   opts?: any,
-    // ) {
-    //   var onceFn = function (e) {
-    //     el.removeEventListener(event, onceFn);
-    //     fn.apply(this, arguments);
-    //   };
+    function once(
+      el: HTMLElement,
+      event: Record<string, any>,
+      fn: () => void,
+      opts?: any,
+    ) {
+      var onceFn = function (e) {
+        el.removeEventListener(event, onceFn);
+        fn.apply(this, arguments);
+      };
 
-    //   el.addEventListener(event, onceFn, opts);
-    //   return onceFn;
-    // }
+      el.addEventListener(event, onceFn, opts);
+      return onceFn;
+    }
 
-    // once(document.documentElement, "touchstart", async function (e) {
-    //   let ttt = setInterval(() => {
-    //     let video = document.querySelector("#vid");
-    //     if (video) {
-    //       clearInterval(ttt);
-    //       video.play();
-    //       setTimeout(() => {
-    //         video.pause();
-    //       });
-    //     }
-    //   }, 1);
-    // });
+    once(document.documentElement, "touchstart", async function (e) {
+      let ttt = setInterval(() => {
+        let video = document.querySelector("#vid");
+        if (video) {
+          clearInterval(ttt);
+          video.play();
+          setTimeout(() => {
+            video.pause();
+          });
+        }
+      }, 1);
+    });
 
     // {
     //   let ttt = setInterval(() => {
@@ -264,7 +264,6 @@ export function VideoBackground({
           className=" z-[15] absolute top-0 left-0 object-cover w-full h-full select-none"
           id="vid"
           src={sURL}
-          preload="auto"
           autoFocus
           muted
           playsInline={true}
@@ -291,13 +290,6 @@ export function VideoBackground({
                 currentTime: ev.target.duration || 1,
               },
             );
-
-            ev.target.currentTime = 0.1;
-            setTimeout(() => {
-              ev.target.currentTime = 0;
-
-              onReady();
-            }, 10);
           }}
         ></video>
       )}
