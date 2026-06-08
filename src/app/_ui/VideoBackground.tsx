@@ -146,8 +146,8 @@ export function VideoBackground({
 
       <img className=" z-[1] absolute top-0 left-0 object-cover w-full h-full select-none fill-background bg-linear-60 from-grey-200 to-grey-700"></img>
 
-      <div className=" absolute top-0 left-0 z-[1] w-full h-full bg-white flex items-center justify-center">
-        <div className="text-7xl">{`Loading`}</div>
+      <div className=" absolute top-0 left-0 z-[1] w-full h-full bg-[#b2f5ff] flex items-center justify-center">
+        <div className="text-7xl text-white">{`Loading`}</div>
       </div>
 
       {sURL && (
